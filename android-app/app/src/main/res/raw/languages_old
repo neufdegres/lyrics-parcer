@@ -1,0 +1,4 @@
+code,language,romanization,parcer
+FR,français,no,fr_core_news_sm
+EN,english,no,en_core_web_sm
+JP,日本語,yes,ja_core_news_sm

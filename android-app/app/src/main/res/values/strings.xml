@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">LyricsParser</string>
+    <!--Home-->
+    <string name="home_searchbar">Rechercher des lyrics, un artiste, etc.</string>
+    <string name="home_add_lyrics">Ajouter une nouvelle chanson</string>
+    <string name="home_add_multiple_lyrics">Ajouter de nouvelles chanson d\'un fichier texte</string>
+    <string name="home_recent">Récents</string>
+    <!--Add Original-->
+    <string name="al_title">Ajouter une nouvelle chanson</string>
+    <string name="al_back">Retour</string>
+    <string name="al_next">Suivant</string>
+    <string name="al_end">Terminer</string>
+    <!--1-->
+    <string name="al_1_headline">Commençons avec les infos sur la chanson</string>
+    <string name="al_1_title">Titre</string>
+    <string name="al_1_artist">Artiste</string>
+    <string name="al_1_language">Langue</string>
+    <!--2-->
+    <string name="al_2_headline">Maintenant, rentrez les paroles de la chanson</string>
+    <string name="al_2_disclaimer">Veuillez écrire les paroles dans la langue originelle, pas de romanisation. (ex: ✅ -> 日本語, ❎ -> nihon-go)</string>
+    <string name="al_2_lyrics">Paroles</string>
+    <!--3-->
+    <string name="al_3_headline">Et si on romanisait tout cela ?</string>
+    <string name="al_3_disclaimer">Cette étape est facultative. Elle sert juste à faciliter la lecture. Vous pouvez également laisser des lignes vides.</string>
+    <!--4-->
+    <string name="al_4_headline">Place à la traduction !</string>
+    <string name="al_4_disclaimer">Cette étape est facultative. Vous pouvez également laisser des lignes vides.</string>
+    <!--original rows-->
+    <string name="lyrics_row_ori_test">熱い夜に紛れ 愛は動き出す</string>
+    <string name="lyrics_row_rom_test">atsui yoru ni magire  ai wa ugokidasu</string>
+    <string name="lyrics_row_tra_test">Under cover of hot night the love comes alive</string>
+    <!--languages rows-->
+    <string name="lang_row_fr_test">Français</string>
+    <string name="lang_row_jp_test">日本語</string>
+    <!--AddMultiple-->
+    <string name="am_title">Ajouter plusieurs chansons</string>
+    <string name="am_1">Veuillez sélectionner un fichier texte qui contient les lyrics à ajouter</string>
+    <string name="am_no_file">Aucun fichier sélectionné.</string>
+    <string name="am_select">Sélectionner</string>
+    <string name="am_add">Ajouter</string>
+    <string name="am_adding">Ajout en cours...</string>
+    <string name="am_added">Ajouté</string>
+    <!--Display-->
+    <string name="display_title_test">midnight creative drive</string>
+    <string name="display_artist_test">frederic</string>
+    <string name="display_lang_test">日本語</string>
+    <string name="display_romanize">Romaniser</string>
+    <string name="display_romanization_ongoing">Rom. en cours</string>
+    <string name="display_romanized">Romanisé</string>
+    <string name="display_romanize_error">Rom. impossible</string>
+    <string name="display_translate">Traduire</string>
+    <string name="display_translation_ongoing">Trad. en cours</string>
+    <string name="display_translated">Traduit</string>
+    <string name="display_translate_error">Trad. impossible</string>
+    <string name="display_underline">Surligner</string>
+    <string name="display_n5">N5</string>
+    <string name="display_n4">N4</string>
+    <string name="display_n3">N3</string>
+    <!--action dialog-->
+    <string name="display_action_copy">Copier le texte</string>
+    <string name="display_action_edit">Editer</string>
+    <string name="display_action_delete">Supprimer</string>
+    <!--Edit-->
+    <string name="edit_title">Editer une chanson existante</string>
+    <string name="edit_back">Retour</string>
+    <string name="edit_next">Suivant</string>
+    <string name="edit_end">Terminer</string>
+    <!--Results-->
+    <string name="results_all">Tout</string>
+    <string name="results_artist">Artiste</string>
+    <string name="results_title">Titre</string>
+    <string name="results_lyrics">Lyrics</string>
+    <string name="results_searchbar">Rechercher...</string>
+    <string name="results_no_result">Aucun résultat pour le terme recherché</string>
+    <string name="results_example_1">恋することしか<font color="#FF0000"><b>出来ない</b></font>みたいに</string>
+    <string name="results_example_term">出来ない</string>
+    <string name="results_example_artist_title">恋することしか出来ないみたいに - GARNET CROW</string>
+    <string name="results_example_artist_shorten">恋することしか.... - GARNET CROW</string>
+    <!--Artist-->
+    <string name="artist_title">Liste des chansons de l\'artiste\n\"Garnet crow\"</string>
+    <string name="artist_count">x résultats</string>
+    <string name="artist_example_title">❖ 僕らだけの未来</string>
+</resources>
