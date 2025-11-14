@@ -1,4 +1,4 @@
-# lyrics-parcer
+# LyricsParser
 
 Application de visualisation de paroles de chanson. 
 
@@ -28,7 +28,7 @@ Application de visualisation de paroles de chanson.
 
 - Coté serveur :
   - déplacer les fichiers du dossier `server` dans un serveur Web (ex : Apache)
-  - modifier le fichier [`config.properties`](android-app/config.properties) avec l'addresse du dossier contenant ces mêmes fichiers (ex: "https://0.0.0.0/LyricsParcer")
+  - modifier le fichier [`config.properties`](android-app/config.properties) avec l'addresse du dossier contenant ces mêmes fichiers (ex: "https://0.0.0.0/LyricsParser")
   - modifier le fichier [`deepl`](server/deepl) avec votre clé d'API générée sur le site de [DeepL](https://www.deepl.com/fr/translator)
 
 - Coté application : ouvrir le dossier `android-app` dans Android Studio puis exécuter
