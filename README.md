@@ -37,7 +37,7 @@ Application de visualisation de paroles de chanson.
 
 Un fichier [`lyrics.txt`](lyrics.txt) contenant 21 fiches de paroles est fourni dans le dépot.
 
-Pour insérer ces fiches dans l'application, cliquer sur le texte "Ajouter de nouvelles chansons d'un fichier texte" (voir section suivante) de la page d'accueil.
+Pour insérer ces fiches dans l'application, cliquer sur le bouton-texte `Ajouter de nouvelles chansons d'un fichier texte` (voir section suivante) de la page d'accueil.
 
 Ensuite, sélectionner le fichier depuis votre téléphone puis cliquer sur "Ajouter".
 
