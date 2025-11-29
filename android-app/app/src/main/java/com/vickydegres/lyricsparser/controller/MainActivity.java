@@ -21,13 +21,10 @@ import com.vickydegres.lyricsparser.controller.adapters.RecentAdapter;
 import com.vickydegres.lyricsparser.database.AppDatabase;
 import com.vickydegres.lyricsparser.database.AppDatabaseSingleton;
 import com.vickydegres.lyricsparser.database.SongInfo;
-import com.vickydegres.lyricsparser.database.repositories.RomanizationRepository;
 import com.vickydegres.lyricsparser.database.repositories.SongRepository;
-import com.vickydegres.lyricsparser.database.repositories.TranslationRepository;
 import com.vickydegres.lyricsparser.util.Song;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

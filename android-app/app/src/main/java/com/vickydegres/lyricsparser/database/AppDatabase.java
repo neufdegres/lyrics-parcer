@@ -22,18 +22,4 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract SongInfoDAO songDao();
     public abstract OriginalDAO lyricsDao();
 
-    /* @DeleteTable.Entries(
-            @DeleteTable(
-                    tableName = "romanization"
-            )
-    )
-    interface MyAutoMigration extends AutoMigrationSpec { }
-
-    @DeleteTable.Entries(
-            @DeleteTable(
-                    tableName = "translation"
-            )
-    )
-    interface MyAutoMigration2 extends AutoMigrationSpec { } */
-
 }

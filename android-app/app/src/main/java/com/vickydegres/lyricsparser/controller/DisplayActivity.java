@@ -33,9 +33,7 @@ import com.vickydegres.lyricsparser.database.AppDatabaseSingleton;
 import com.vickydegres.lyricsparser.database.Original;
 import com.vickydegres.lyricsparser.database.SongInfo;
 import com.vickydegres.lyricsparser.database.repositories.OriginalRepository;
-import com.vickydegres.lyricsparser.database.repositories.RomanizationRepository;
 import com.vickydegres.lyricsparser.database.repositories.SongRepository;
-import com.vickydegres.lyricsparser.database.repositories.TranslationRepository;
 import com.vickydegres.lyricsparser.models.DisplayModel;
 import com.vickydegres.lyricsparser.net.RequestQueueSingleton;
 import com.vickydegres.lyricsparser.util.Func;
@@ -59,8 +57,6 @@ public class DisplayActivity extends AppCompatActivity
     private AppDatabase mDatabase;
     private SongRepository mSongRep;
     private OriginalRepository mOriRep;
-    private RomanizationRepository mRomRep;
-    private TranslationRepository mTransRep;
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     DisplayModel mModel;
     TextView mTitle, mArtist, mLangText;
@@ -86,8 +82,6 @@ public class DisplayActivity extends AppCompatActivity
         mDatabase = AppDatabaseSingleton.getInstance(getApplicationContext());
         mSongRep = new SongRepository(mDatabase.songDao());
         mOriRep = new OriginalRepository(mDatabase.lyricsDao());
-//        mRomRep = new RomanizationRepository(mDatabase.romanizationDao());
-//        mTransRep = new TranslationRepository(mDatabase.translationDao());
 
         mTitle = findViewById(R.id.display_title);
         mArtist = findViewById(R.id.display_artist);
@@ -240,7 +234,7 @@ public class DisplayActivity extends AppCompatActivity
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.e("volleyyyyy", error.toString());
-                            Toast.makeText(DisplayActivity.this, "Volley error.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DisplayActivity.this, "Volley error. 0", Toast.LENGTH_LONG).show();
                             mModel.setTitleRomanized("[romanization impossible]");
                         }
                     });
@@ -297,7 +291,7 @@ public class DisplayActivity extends AppCompatActivity
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e("volleyyyyy", error.toString());
-                    Toast.makeText(DisplayActivity.this, "Volley error.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DisplayActivity.this, "Volley error. 1", Toast.LENGTH_LONG).show();
                     mRomanize.setText(R.string.display_romanize_error);
                 }
             });
@@ -353,7 +347,7 @@ public class DisplayActivity extends AppCompatActivity
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.e("volleyyyyy", error.toString());
-                            Toast.makeText(DisplayActivity.this, "Volley error.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DisplayActivity.this, "Volley error. 2", Toast.LENGTH_LONG).show();
                             mTranslate.setText(R.string.display_translate_error);
                         }
                     });

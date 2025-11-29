@@ -17,19 +17,11 @@ import com.vickydegres.lyricsparser.R;
 import com.vickydegres.lyricsparser.database.AppDatabase;
 import com.vickydegres.lyricsparser.database.AppDatabaseSingleton;
 import com.vickydegres.lyricsparser.database.Original;
-import com.vickydegres.lyricsparser.database.Romanization;
 import com.vickydegres.lyricsparser.database.SongInfo;
-import com.vickydegres.lyricsparser.database.Translation;
 import com.vickydegres.lyricsparser.database.repositories.OriginalRepository;
-import com.vickydegres.lyricsparser.database.repositories.RomanizationRepository;
 import com.vickydegres.lyricsparser.database.repositories.SongRepository;
-import com.vickydegres.lyricsparser.database.repositories.TranslationRepository;
 import com.vickydegres.lyricsparser.models.AddLyricsModel;
 import com.vickydegres.lyricsparser.util.Lyrics;
-import com.vickydegres.lyricsparser.util.Song;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -37,15 +29,11 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.subscribers.DisposableSubscriber;
 
 public class AddLyricsActivity extends AppCompatActivity {
     AppDatabase mDatabase;
     private SongRepository mSongRep;
     private OriginalRepository mOriginalRepository;
-    private RomanizationRepository mRomRep;
-    private TranslationRepository mTransRep;
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     Button mBack, mNext;
     private AddLyricsModel mModel;
@@ -61,8 +49,6 @@ public class AddLyricsActivity extends AppCompatActivity {
         mDatabase = AppDatabaseSingleton.getInstance(getApplicationContext());
         mSongRep = new SongRepository(mDatabase.songDao());
         mOriginalRepository = new OriginalRepository(mDatabase.lyricsDao());
-//        mRomRep = new RomanizationRepository(mDatabase.romanizationDao());
-//        mTransRep = new TranslationRepository(mDatabase.translationDao());
 
         mModel = new AddLyricsModel();
 
@@ -119,33 +105,12 @@ public class AddLyricsActivity extends AppCompatActivity {
                         if (curr2.canPassToNextStep()) {
                             Lyrics ori = Lyrics.stringToLyrics(curr2.getLyrics());
                             mModel.setOriginal(ori);
-                            Lyrics rom = new Lyrics();
-                            mModel.setRomanization(rom);
-                            Lyrics tra = new Lyrics();
-                            mModel.setTranslation(tra);
                             addToDatabase();
                             finish();
                         } else {
                             Toast.makeText(AddLyricsActivity.this, "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show();
                         }
                         break;
-                    /* case 3 : // romanization
-                        AddLyrics3Fragment curr3 = (AddLyrics3Fragment) fragmentManager.findFragmentById(R.id.al_fragmentCV);
-                        Lyrics rom = new Lyrics(curr3.getRomanization());
-                        mModel.setRomanization(rom);
-                        mNext.setText(R.string.al_end);
-                        nextFrag = (AddLyrics4Fragment) new AddLyrics4Fragment();
-                        fragmentTransaction.replace(R.id.al_fragmentCV, nextFrag, "3");
-                        fragmentTransaction.addToBackStack("3");
-                        currentFragment++;
-                        break;
-                    case 4 : // traduction
-                        AddLyrics4Fragment curr4  = (AddLyrics4Fragment) fragmentManager.findFragmentById(R.id.al_fragmentCV);
-                        Lyrics tra = new Lyrics(curr4.getTranslation());
-                        mModel.setTranslation(tra);
-                        addToDatabase();
-                        finish();
-                        break; */
                 }
                 fragmentTransaction.commit();
             }
@@ -192,16 +157,7 @@ public class AddLyricsActivity extends AppCompatActivity {
                     public void onSuccess(@NonNull Long l) {
                         int songId = l.intValue();
                         Original ori = new Original(songId, mModel.getOriginal().toString());
-                        Romanization rom = null;
-                        Translation tra = null;
-                        if (!mModel.getRomanization().isEmpty())
-                            rom = new Romanization(songId, mModel.getRomanization().toString());
-                        if (!mModel.getTranslation().isEmpty())
-                            tra = new Translation(songId, mModel.getTranslation().toString());
-
-                        Log.v("coucou", "bande de nouilles !!!!");
-                        Log.v("songId", songId + "");
-                        insertOriginalAndElse(ori, rom, tra);
+                        insertSongLyrics(ori);
                     }
 
                     @Override
@@ -211,54 +167,11 @@ public class AddLyricsActivity extends AppCompatActivity {
         //mCompositeDisposable.add(dis)
     }
 
-    private void insertOriginalAndElse(Original ori, Romanization rom, Translation tra) {
-        Single<Boolean> result = null;
-        if (rom != null && tra != null) {
-            result = Single.zip(
-                    Single.fromCallable(() -> {
-                        mOriginalRepository.insert(ori);
-                        return true;
-                    }),
-                    Single.fromCallable(() -> {
-                        mRomRep.insert(rom);
-                        return true;
-                    }),
-                    Single.fromCallable(() -> {
-                        mTransRep.insert(tra);
-                        return true;
-                    }),
-                    (oriResult, romResult, traResult) -> true
-            );
-        } else if (rom != null) {
-            result = Single.zip(
-                    Single.fromCallable(() -> {
-                        mOriginalRepository.insert(ori);
-                        return true;
-                    }),
-                    Single.fromCallable(() -> {
-                        mRomRep.insert(rom);
-                        return true;
-                    }),
-                    (oriResult, romResult) -> true
-            );
-        } else if (tra != null) {
-            result = Single.zip(
-                    Single.fromCallable(() -> {
-                        mOriginalRepository.insert(ori);
-                        return true;
-                    }),
-                    Single.fromCallable(() -> {
-                        mTransRep.insert(tra);
-                        return true;
-                    }),
-                    (oriResult, traResult) -> true
-            );
-        } else {
-            result = Single.fromCallable(() -> {
-                        mOriginalRepository.insert(ori);
-                        return true;
-            });
-        }
+    private void insertSongLyrics(Original ori) {
+        Single<Boolean> result = Single.fromCallable(() -> {
+            mOriginalRepository.insert(ori);
+            return true;
+        });
 
         result.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Boolean>() {
